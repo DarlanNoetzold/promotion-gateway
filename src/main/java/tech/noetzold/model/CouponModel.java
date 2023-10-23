@@ -17,5 +17,5 @@ public class CouponModel {
     private PromotionModel promotion;
 
     private String code;
-    
+
 }
