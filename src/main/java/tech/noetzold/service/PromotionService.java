@@ -2,6 +2,7 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import tech.noetzold.model.PromotionModel;
 import tech.noetzold.repository.PromotionRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -68,5 +70,10 @@ public class PromotionService {
     @CacheInvalidateAll(cacheName = "promotion")
     public void deletePromotionModelById(UUID id) {
         promotionRepository.deleteById(id);
+    }
+
+    public List<PromotionModel> findAllPromotionModel() {
+        PanacheQuery<PromotionModel> promotionModelPanacheQuery = promotionRepository.findAll();
+        return promotionModelPanacheQuery.list();
     }
 }
