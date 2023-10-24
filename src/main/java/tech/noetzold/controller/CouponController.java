@@ -11,6 +11,7 @@ import org.jboss.logging.Logger;
 import tech.noetzold.model.CouponModel;
 import tech.noetzold.service.CouponService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Path("/api/promo/v1/coupon")
@@ -25,6 +26,20 @@ public class CouponController {
     Emitter<CouponModel> quoteRequestEmitter;
 
     private static final Logger logger = Logger.getLogger(CouponController.class);
+
+    @GET
+    @RolesAllowed("admin")
+    public Response getAlCouponModel(){
+
+        List<CouponModel> couponModels = couponService.findAllCouponModel();
+
+        if(couponModels.isEmpty()){
+            logger.error("There is no coupon");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.ok(couponModels).build();
+    }
 
     @GET
     @Path("/{id}")
