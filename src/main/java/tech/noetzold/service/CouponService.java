@@ -2,6 +2,7 @@ package tech.noetzold.service;
 
 import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import tech.noetzold.model.CouponModel;
 import tech.noetzold.repository.CouponRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +20,11 @@ public class CouponService {
     @Inject
     CouponRepository couponRepository;
 
+    @Transactional
+    public List<CouponModel> findAllCouponModel(){
+        PanacheQuery<CouponModel> allCouponModel = couponRepository.findAll();
+        return allCouponModel.list();
+    }
     @Transactional
     @CacheResult(cacheName = "coupon")
     public CouponModel findCouponModelById(UUID id){
