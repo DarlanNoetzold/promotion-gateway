@@ -8,9 +8,11 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.logging.Logger;
+import tech.noetzold.model.CouponModel;
 import tech.noetzold.model.PromotionModel;
 import tech.noetzold.service.PromotionService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Path("/api/promo/v1/promotion")
@@ -25,6 +27,20 @@ public class PromotionController {
     Emitter<PromotionModel> quoteRequestEmitter;
 
     private static final Logger logger = Logger.getLogger(PromotionController.class);
+
+    @GET
+    @RolesAllowed("admin")
+    public Response getAlCouponModel(){
+
+        List<PromotionModel> promotionModels = promotionService.findAllPromotionModel();
+
+        if(promotionModels.isEmpty()){
+            logger.error("There is no promotion");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.ok(promotionModels).build();
+    }
 
     @GET
     @Path("/{id}")
