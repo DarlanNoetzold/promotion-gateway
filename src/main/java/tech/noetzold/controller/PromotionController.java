@@ -82,7 +82,7 @@ public class PromotionController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updatePromotionModel(@PathParam("id") String id, PromotionModel updatedPromotionModel) {
-        if (id.isBlank() || updatedPromotionModel.getPromoId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update promotionModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -93,12 +93,15 @@ public class PromotionController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedPromotionModel.setPromoId(existingPromotionModel.getPromoId());
+
         promotionService.updatePromotionModel(updatedPromotionModel);
 
         return Response.ok(updatedPromotionModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deletePromotionModel(@PathParam("id") String id){
         if (id.isBlank()) {
