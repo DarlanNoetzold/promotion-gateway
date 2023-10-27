@@ -81,7 +81,7 @@ public class CouponController {
     @Path("/{id}")
     @RolesAllowed("admin")
     public Response updateCouponModel(@PathParam("id") String id, CouponModel updatedCouponModel) {
-        if (id.isBlank() || updatedCouponModel.getCouponId() == null) {
+        if (id.isBlank()) {
             logger.warn("Error to update couponModel: " + id);
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -92,12 +92,15 @@ public class CouponController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
+        updatedCouponModel.setCouponId(existingCouponModel.getCouponId());
+
         couponService.updateCouponModel(updatedCouponModel);
 
         return Response.ok(updatedCouponModel).build();
     }
 
     @DELETE
+    @Path("/{id}")
     @RolesAllowed("admin")
     public Response deleteCouponModel(@PathParam("id") String id){
         if (id.isBlank()) {
