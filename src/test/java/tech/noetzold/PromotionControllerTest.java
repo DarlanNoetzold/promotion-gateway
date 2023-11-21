@@ -54,7 +54,7 @@ public class PromotionControllerTest {
                 .contentType(ContentType.JSON)
                 .body("{ \"promoName\": \"Test Promotion\", \"valueType\": \"PERCENT\", \"value\": 20.0, \"promoDescription\": \"Test Description\", \"promotionType\": \"ITEM\", \"promoCompDesc\": \"Test Comp Desc\", \"promoCompType\": 0.5, \"promoDtlId\": 1.0, \"rules\": \"Test Rules\", \"startDate\": \"2023-10-26\", \"endDate\": \"2023-10-27\", \"applyToCode\": \"TESTCODE\", \"discountLimit\": 50.0, \"exceptionParentId\": \"TESTPARENT\" }")
                 .when()
-                .post("http://localhost:5000/api/promo/v1/promotion")
+                .post("http://localhost:4000/api/promo/v1/promotion")
                 .then()
                 .statusCode(201);
     }
@@ -67,7 +67,7 @@ public class PromotionControllerTest {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("http://localhost:5000/api/promo/v1/promotion/{id}", "8b71d0c5-9f98-4c4a-815c-55e4c0518f6a")
+                .get("http://localhost:4000/api/promo/v1/promotion/{id}", "8b71d0c5-9f98-4c4a-815c-55e4c0518f6a")
                 .then()
                 .statusCode(200);
     }
@@ -81,7 +81,7 @@ public class PromotionControllerTest {
                 .contentType(ContentType.JSON)
                 .body("{ \"promoName\": \"Updated Promotion\", \"promoDescription\": \"Updated Description\" }")
                 .when()
-                .put("http://localhost:5000/api/promo/v1/promotion/{id}", "8b71d0c5-9f98-4c4a-815c-55e4c0518f6a")
+                .put("http://localhost:4000/api/promo/v1/promotion/{id}", "8b71d0c5-9f98-4c4a-815c-55e4c0518f6a")
                 .then()
                 .statusCode(200);
     }
@@ -94,7 +94,7 @@ public class PromotionControllerTest {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("http://localhost:5000/api/promo/v1/promotion/{id}", "d3e6dbb6-4f9c-4b4d-843e-8f0d8bdc5e58")
+                .delete("http://localhost:4000/api/promo/v1/promotion/{id}", "d3e6dbb6-4f9c-4b4d-843e-8f0d8bdc5e58")
                 .then()
                 .statusCode(200);
     }
