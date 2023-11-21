@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tech.noetzold.model.enums.PromotionType;
+import tech.noetzold.model.enums.ValueType;
 
 import java.util.Date;
 import java.util.UUID;
