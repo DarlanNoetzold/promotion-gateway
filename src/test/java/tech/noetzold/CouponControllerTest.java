@@ -57,7 +57,7 @@ public class CouponControllerTest {
                 .contentType(ContentType.JSON)
                 .body("{ \"promotion\": { \"promoId\": \"8b71d0c5-9f98-4c4a-815c-55e4c0518f6a\" }, \"code\": \"COUPON123\" }")
                 .when()
-                .post("http://localhost:5000/api/promo/v1/coupon")
+                .post("http://localhost:4000/api/promo/v1/coupon")
                 .then()
                 .statusCode(201);
     }
@@ -70,7 +70,7 @@ public class CouponControllerTest {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(ContentType.JSON)
                 .when()
-                .get("http://localhost:5000/api/promo/v1/coupon/{id}", "26c0dd7d-2c63-4a5e-9b87-94d7b5cb9c98")
+                .get("http://localhost:4000/api/promo/v1/coupon/{id}", "26c0dd7d-2c63-4a5e-9b87-94d7b5cb9c98")
                 .then()
                 .statusCode(200);
     }
@@ -84,7 +84,7 @@ public class CouponControllerTest {
                 .contentType(ContentType.JSON)
                 .body("{ \"promotion\": { \"promoId\": \"8b71d0c5-9f98-4c4a-815c-55e4c0518f6a\" }, \"code\": \"UPDATED_COUPON\" }") // Substitua "your_promo_id" pelo ID da promoção existente
                 .when()
-                .put("http://localhost:5000/api/promo/v1/coupon/{id}", "26c0dd7d-2c63-4a5e-9b87-94d7b5cb9c98")
+                .put("http://localhost:4000/api/promo/v1/coupon/{id}", "26c0dd7d-2c63-4a5e-9b87-94d7b5cb9c98")
                 .then()
                 .statusCode(200);
     }
@@ -97,7 +97,7 @@ public class CouponControllerTest {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("http://localhost:5000/api/promo/v1/coupon/{id}", "b3ac9a42-708e-47bb-8f41-299d438cb9f7")
+                .delete("http://localhost:4000/api/promo/v1/coupon/{id}", "b3ac9a42-708e-47bb-8f41-299d438cb9f7")
                 .then()
                 .statusCode(200);
     }
